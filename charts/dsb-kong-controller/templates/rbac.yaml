@@ -6,6 +6,14 @@ rules:
 - apiGroups: ['dsb.dk']
   resources: ['*']
   verbs: ['*']
+- apiGroups:
+    - ''
+  resources:
+    - services
+    - pods
+  verbs:
+    - get
+    - list  
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
