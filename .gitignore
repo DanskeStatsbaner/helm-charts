@@ -1,0 +1,9 @@
+**/.idea/**
+**/bin/**
+**/obj/**
+**/launchSettings.json
+**.csproj.user
+**/.vs/**
+**/out/**
+**.DotSettings.user
+**/out/**
