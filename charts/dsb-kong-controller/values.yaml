@@ -1,0 +1,60 @@
+image:
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220504-5b3f64a"
+  pullPolicy: IfNotPresent
+
+# Use these fields to override the name of the deployment
+nameOverride: ""
+fullnameOverride: ""
+
+# Specify the ingress suffix (eg. azure.dsb.dk) of API's deployed to the cluster that this instance of the portal controller will handle.
+# This information is used to enrich the API spec with servers: url before submitting it to the kong portal. 
+# The controller expects the API's ingresses to be either <service-name>.<namespace>.<suffix> for standalone services 
+# or api.<namespace>.<suffix> in case of merged api.
+ingressSuffix: ""
+
+# Url to the kong admin service of the developer portal that you wish to syncronize.
+kongAdminUrl: ""
+
+# Name of the secret that contains the RBAC token used to access the kong admin api. The secret must have the RBAC token provided in the 'token' key.
+kongTokenSecret: ""
+
+# Optional list of namespaces to be monitored by this instance usefull when running multiple instances of the controller. 
+# expects either an empty string "" or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3,"
+monitorNamespaces: ""
+
+serviceAccount:
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set, a name is generated using the fullname template
+  name: ""
+
+imagePullSecrets: []
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # Not enabled by default, but values are provided as guidance
+  # limits:
+  #   cpu: 500m
+  #   memory: 256Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 60Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,0 +1,89 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: dsb-kong-apis.dsb.dk
+spec:
+  group: dsb.dk
+  versions: 
+    - name: v1
+      storage: true
+      served: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                port:
+                  type: integer
+                swagger:
+                  type: string
+  names:
+    kind: DSBKongApi
+    plural: dsb-kong-apis
+  scope: Namespaced
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: dsb-kong-api-data.dsb.dk
+spec:
+  group: dsb.dk
+  versions:
+    - name: v1
+      storage: true
+      served: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                data:
+                  type: string
+                updated:
+                  type: string
+  names:
+    kind: DSBKongApiData
+    plural: dsb-kong-api-data
+  scope: Namespaced
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: dsb-kong-api-configs.dsb.dk
+spec:
+  group: dsb.dk
+  versions:
+    - name: v1
+      storage: true
+      served: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                termsUrl:
+                  type: string
+                contactEmail:
+                  type: string
+                licenseName:
+                  type: string
+                licenseUrl:
+                  type: string
+                securityScheme:
+                  type: string
+                securityKeyName:
+                  type: string
+  names:
+    kind: DSBKongApiConfig
+    plural: dsb-kong-api-configs
+  scope: Namespaced
