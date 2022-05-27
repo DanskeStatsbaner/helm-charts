@@ -1,5 +1,5 @@
 image:
-  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220504-5b3f64a"
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220527-72-c62de93"
   pullPolicy: IfNotPresent
 
 # Use these fields to override the name of the deployment
