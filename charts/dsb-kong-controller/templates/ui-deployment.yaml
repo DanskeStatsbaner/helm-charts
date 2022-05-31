@@ -39,7 +39,10 @@ spec:
           env: 
             - name: namespace
               value: {{ .Values.portal.lookupNamespace }}
-
+          ports:
+            - name: http
+              containerPort: 8090
+              protocol: TCP
       {{- with .Values.portal.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
