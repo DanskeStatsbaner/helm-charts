@@ -65,7 +65,25 @@ controller:
 # Enabling this feature deployes a configuration object that alters the behaviour of the controller.
 mergeApi:
   enabled: false
-  # todo: more values for the config objects
+
+# Mandatory Basic descriptive fields for the api, should always be filled out
+  title: ""
+  description: ""
+
+# Optional field to display a link to the api's licenses can also be used to link to a more descriptive documentation
+  licenseName: ""
+  licenseUrl: ""
+
+# Optional contact email, if not provided feature is disabled
+  contactEmail: ""
+
+# Optional fields to activate api security, scheme supports one of 3 values "JWTBearer, ApiKey, BasicAuth"
+# securtyKeyName field is only used if ApiKey is provided as secruityScheme,
+  securityScheme: ""
+  securityKeyName: ""
+
+# Optional Terms of service url can link to anything but link text is hardcoded to "Terms of service"
+  termsUrl: ""
 
 # Optional component to expose the merged swagger definition through an ingress.
 # Enabling this feature deployes a ui service to expose the merged api and creates an ingress to allow access to the documentation.
