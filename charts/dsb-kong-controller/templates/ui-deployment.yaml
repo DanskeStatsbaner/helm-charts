@@ -1,0 +1,55 @@
+{{- if .Values.portal.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dsb-kong-controller.portal.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "dsb-kong-controller.portal.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "dsb-kong-controller.portal.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.portal.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "dsb-kong-controller.portal.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.portal.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "dsb-kong-controller.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.portal.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "dsb-kong-controller.portal.fullname" . }}
+          securityContext:
+            {{- toYaml .Values.portal.securityContext | nindent 12 }}
+          image: {{ .Values.portal.image.url }}
+          imagePullPolicy: {{ .Values.portal.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.portal.resources | nindent 12 }}
+          env: 
+            - name: namespace
+              value: {{ .Values.portal.lookupNamespace }}
+
+      {{- with .Values.portal.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.portal.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.portal.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
