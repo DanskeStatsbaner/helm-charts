@@ -1,0 +1,16 @@
+{{- if .Values.mergeApi.enabled -}}
+apiVersion: dsb.dk/v1
+kind: DSBKongApiConfig
+metadata:
+  name: api
+  namespace: {{ .Release.Namespace }}
+spec:
+  title: {{ .Values.mergeApi.title | quote }}
+  description:  {{ .Values.mergeApi.description | quote }}
+  contactEmail: {{ .Values.mergeApi.contactEmail | quote }}
+  licenseName: {{ .Values.mergeApi.licenseName | quote }}
+  licenseUrl: {{ .Values.mergeApi.licenseUrl | quote }}
+  securityKeyName: {{ .Values.mergeApi.securityKeyName | quote }}
+  securityScheme: {{ .Values.mergeApi.securityScheme | quote }}
+  termsUrl: {{ .Values.mergeApi.termsUrl | quote }}
+{{- end }}
