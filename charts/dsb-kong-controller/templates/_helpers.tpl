@@ -31,11 +31,11 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
-Common labels
+Controller labels
 */}}
-{{- define "dsb-kong-controller.labels" -}}
+{{- define "dsb-kong-controller.controller.labels" -}}
 helm.sh/chart: {{ include "dsb-kong-controller.chart" . }}
-{{ include "dsb-kong-controller.selectorLabels" . }}
+{{ include "dsb-kong-controller.controller.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -43,9 +43,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels
+Controller Selector labels
 */}}
-{{- define "dsb-kong-controller.selectorLabels" -}}
+{{- define "dsb-kong-controller.controller.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "dsb-kong-controller.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
@@ -55,4 +55,31 @@ Create the name of the service account to use
 */}}
 {{- define "dsb-kong-controller.serviceAccountName" -}}
 {{- default (include "dsb-kong-controller.fullname" .) .Values.serviceAccount.name }}
+{{- end }}
+
+{{/*
+Create name for the portal ui service
+*/}}
+{{- define "dsb-kong-controller.portal.fullname" -}}
+{{- printf "%s-%s" (include "dsb-kong-controller.fullname" .) "ui" }}
+{{- end }}
+
+{{/*
+Portal labels
+*/}}
+{{- define "dsb-kong-controller.portal.labels" -}}
+helm.sh/chart: {{ include "dsb-kong-controller.chart" . }}
+{{ include "dsb-kong-controller.portal.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Portal Selector labels
+*/}}
+{{- define "dsb-kong-controller.portal.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "dsb-kong-controller.portal.fullname" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
