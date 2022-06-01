@@ -11,7 +11,7 @@ serviceAccount:
 
 controller:
   image:
-    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220531-83-8fb2963"
+    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220601-84-9995e4a"
     pullPolicy: IfNotPresent
 
   # Specify the ingress suffix (eg. azure.dsb.dk) of API's deployed to the cluster that this instance of the portal controller will handle.
@@ -78,7 +78,7 @@ mergeApi:
   contactEmail: ""
 
 # Optional fields to activate api security, scheme supports one of 3 values "JWTBearer, ApiKey, BasicAuth"
-# securtyKeyName field is only used if ApiKey is provided as secruityScheme,
+# securityKeyName field is only used if ApiKey is provided as securityScheme,
   securityScheme: ""
   securityKeyName: ""
 
@@ -89,7 +89,7 @@ mergeApi:
 # Enabling this feature deployes a ui service to expose the merged api and creates an ingress to allow access to the documentation.
 portal:
   image:
-    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.portal.ui:20220531-83-8fb2963"
+    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.portal.ui:20220601-84-9995e4a"
     pullPolicy: IfNotPresent
 
   enabled: false
