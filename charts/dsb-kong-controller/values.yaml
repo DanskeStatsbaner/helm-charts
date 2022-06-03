@@ -11,7 +11,7 @@ serviceAccount:
 
 controller:
   image:
-    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220603-87-c96cd04"
+    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20220603-89-94f0992"
     pullPolicy: IfNotPresent
 
   # Specify the ingress suffix (eg. azure.dsb.dk) of API's deployed to the cluster that this instance of the portal controller will handle.
@@ -92,7 +92,7 @@ mergeApi:
 # Enabling this feature deployes a ui service to expose the merged api and creates an ingress to allow access to the documentation.
 portal:
   image:
-    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.portal.ui:20220603-87-c96cd04"
+    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.portal.ui:20220603-89-94f0992"
     pullPolicy: IfNotPresent
 
   enabled: false
