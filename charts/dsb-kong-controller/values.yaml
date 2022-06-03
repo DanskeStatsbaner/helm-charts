@@ -26,6 +26,9 @@ controller:
   # Name of the secret that contains the RBAC token used to access the kong admin api. The secret must have the RBAC token provided in the 'token' key.
   kongTokenSecret: ""
 
+  # Allows you to disable kong updates when using merge api by changing the values to "false" (all lowercase)
+  kongUpdate: "true"
+
   # Optional list of namespaces to be monitored by this instance usefull when running multiple instances of the controller. 
   # expects either an empty string "" or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
   monitorNamespaces: ""

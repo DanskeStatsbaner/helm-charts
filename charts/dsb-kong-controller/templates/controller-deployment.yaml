@@ -44,6 +44,8 @@ spec:
                   name: {{ .Values.controller.kongTokenSecret }}
                   key: token
                   optional: false
+            - name: kong-update
+              value: {{ .Values.controller.kongUpdate }}
             - name: kong-admin-url
               value: {{ .Values.controller.kongAdminUrl }}
             - name: monitor-namespaces
