@@ -37,7 +37,7 @@ spec:
             {{- toYaml .Values.controller.resources | nindent 12 }}
           env: 
             - name: ingress-suffix
-              value: {{ .Values.controller.ingressSuffix }}
+              value: {{ .Values.controller.ingressSuffix | quote }}
             - name: kong-token
               valueFrom:
                 secretKeyRef:
@@ -45,11 +45,11 @@ spec:
                   key: token
                   optional: false
             - name: kong-update
-              value: {{ .Values.controller.kongUpdate }}
+              value: {{ .Values.controller.kongUpdate | quote }}
             - name: kong-admin-url
-              value: {{ .Values.controller.kongAdminUrl }}
+              value: {{ .Values.controller.kongAdminUrl | quote }}
             - name: monitor-namespaces
-              value: {{ .Values.controller.monitorNamespaces }}              
+              value: {{ .Values.controller.monitorNamespaces | quote }}              
 
       {{- with .Values.controller.nodeSelector }}
       nodeSelector:
