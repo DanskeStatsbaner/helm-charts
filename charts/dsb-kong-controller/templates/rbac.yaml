@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include dsb-kong-controller.fullname . }}
+  name: {{ include "dsb-kong-controller.fullname" . }}
 rules:
 - apiGroups: ['dsb.dk']
   resources: ['*']
@@ -22,7 +22,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include dsb-kong-controller.fullname . }}
+  name: {{ include "dsb-kong-controller.fullname" . }}
 subjects:
   - kind: ServiceAccount
     name: {{ include "dsb-kong-controller.serviceAccountName" . }}
