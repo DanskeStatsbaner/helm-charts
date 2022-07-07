@@ -19,6 +19,16 @@ humioRepository: ""
 # expects either an empty string "" a single value prefix or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
 namespaceFilter: ""
 
+# Ingress where the portal will be reachable, should follow "sentry.<namespace>.<suffix>"
+# where namespace is the controllers monitored namespace, and suffix is the clusters ingressSuffix (typically azure.dsb.dk)
+ingress: ""
+
+# Ingress class for the deployed ingress
+ingressClassName: "kong"
+
+# Annotations added to the ingress
+ingressAnnotations: {}
+
 imagePullSecrets: []
 
 podAnnotations: {}
@@ -48,20 +58,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-# Namespace where the api's merged data is located typically the same as monitored namespace
-# named api.<namespace>
-lookupNamespace: ""
-
-# Ingress where the portal will be reachable, should follow "sentry.<namespace>.<suffix>"
-# where namespace is the controllers monitored namespace, and suffix is the clusters ingressSuffix (typically azure.dsb.dk)
-ingress: ""
-
-# Ingress class for the deployed ingress
-ingressClassName: "kong"
-
-# Annotations added to the ingress
-ingressAnnotations: {}
-
-
-
