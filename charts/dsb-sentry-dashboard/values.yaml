@@ -1,0 +1,67 @@
+# Use these fields to override the name of the deployment
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.sentry.dashboard/dsb.sentry.dashboard.ui:20220707-32-940e34a"
+  pullPolicy: IfNotPresent
+
+# Humio api url optional defaults to ("https://cloud.humio.com")
+humioApi: "https://cloud.humio.com"
+
+# Name of the secret that contains the API token used to access the humio search api. The secret must have the api token provided in the 'token' key.
+humioApiTokenSecret: ""
+
+# Url to the kong admin service of the developer portal that you wish to syncronize.
+humioRepository: ""
+
+# Optional list of namespace prefixes to be accessible this instance usefull when running multiple instances of the portal. 
+# expects either an empty string "" a single value prefix or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
+namespaceFilter: ""
+
+imagePullSecrets: []
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # Not enabled by default, but values are provided as guidance
+  # limits:
+  #   cpu: 500m
+  #   memory: 256Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 60Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Namespace where the api's merged data is located typically the same as monitored namespace
+# named api.<namespace>
+lookupNamespace: ""
+
+# Ingress where the portal will be reachable, should follow "sentry.<namespace>.<suffix>"
+# where namespace is the controllers monitored namespace, and suffix is the clusters ingressSuffix (typically azure.dsb.dk)
+ingress: ""
+
+# Ingress class for the deployed ingress
+ingressClassName: "kong"
+
+# Annotations added to the ingress
+ingressAnnotations: {}
+
+
+
