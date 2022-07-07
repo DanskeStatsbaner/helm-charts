@@ -3,7 +3,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.sentry.dashboard/dsb.sentry.dashboard.ui:20220707-32-940e34a"
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.sentry.dashboard/dsb.sentry.dashboard.ui:20220707-35-9f2403d"
   pullPolicy: IfNotPresent
 
 # Humio api url optional defaults to ("https://cloud.humio.com")
