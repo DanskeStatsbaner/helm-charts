@@ -25,10 +25,19 @@ to see the charts.
 Note this list is manually maintained.
 
 ## DSB Kong Controller
-Kubernetes controller to implement the standard usage of Kong in DSB. This service is responsible for updating the Kong developer portal when new services are deployed.
+Kubernetes controller to implement the standard usage of Kong in DSB. This service is responsible for updating the Kong developer portal when new services are deployed. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.kong.controller/browse)
 
 Read the values file to see more settings:
 
 ```
 helm show values dsb/dsb-kong-controller
+```
+
+## DSB Sentry Dashboard
+Lightweight tool to help developers work with the output of structured json logs. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.sentry.dashboard/browse)
+
+Read the values file to see more settings:
+
+```
+helm show values dsb/dsb-sentry-dashboard
 ```
