@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dsb-skooner-lite.fullname" . }}
+  labels:
+    {{- include "dsb-skooner-lite.labels" . | nindent 4 }}
+spec:
+  type: "ClusterIP"
+  ports:
+    - port: 8090
+      targetPort: 4654
+      name: http
+  selector:
+    {{- include "dsb-skooner-lite.selectorLabels" . | nindent 4 }}
