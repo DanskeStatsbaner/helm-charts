@@ -1,0 +1,58 @@
+# Use these fields to override the name of the deployment
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set, a name is generated using the fullname template
+  name: ""
+
+image:
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.skooner.lite/dsb.skooner.lite.ui/20220829-2-fd73c09"
+  pullPolicy: IfNotPresent
+
+# Optional list of namespace prefixes to be accessible this instance usefull when running multiple instances of skooner lite. 
+# expects either an empty string "" a single value prefix or a comma seperated list of prefixes without spaces eg "ns1-,ns2-,ns3-"
+namespaceFilter: ""
+
+# Ingress where the portal will be reachable, should follow "skooner.<cluster-name>.<suffix>"
+# where suffix is the clusters ingressSuffix (typically azure.dsb.dk)
+ingress: ""
+
+# Ingress class for the deployed ingress
+ingressClassName: "kong"
+
+# Annotations added to the ingress
+ingressAnnotations: {}
+
+imagePullSecrets: []
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # Not enabled by default, but values are provided as guidance
+  # limits:
+  #   cpu: 500m
+  #   memory: 256Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 60Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: dsb-skooner-lite
+appVersion: "1.0.1"
+version: 1.0.1
+description: Allows developers to look but not touch the setup inside kubernetes.
+type: application
