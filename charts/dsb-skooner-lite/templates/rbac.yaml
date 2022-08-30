@@ -6,12 +6,35 @@ rules:
 - apiGroups:
   - "*"
   resources:
-  - "*"
+  - events
+  - namespaces
+  - namespaces/status
+  - pods
+  - pods/log
+  - pods/status
+  - poddisruptionbudgets  
+  - services
+  - deployments
+  - deployments/scale
+  - daemonsets
+  - replicasets
+  - replicasets/scale
+  - replicationcontrollers
+  - replicationcontrollers/status
+  - replicationcontrollers/scale  
+  - statefulsets
+  - horizontalpodautoscalers
+  - cronjobs
+  - jobs
+  - ingresses
+  - networkpolicies
+  - limitranges
+  - bindings
+  - resourcequotas
+  - resourcequotas/status
   verbs:
   - get 
   - list
-  - proxy
-  - redirect
   - watch
 - nonResourceURLs:
   - "*"
