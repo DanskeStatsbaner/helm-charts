@@ -10,7 +10,7 @@ serviceAccount:
   name: ""
 
 image:
-  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.skooner.lite/dsb.skooner.lite.ui:20220829-3-3116d54"
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.skooner.lite/dsb.skooner.lite.ui:20220830-5-e37735a"
   pullPolicy: IfNotPresent
 
 # Optional list of namespace prefixes to be accessible this instance usefull when running multiple instances of skooner lite. 
