@@ -9,6 +9,7 @@ rules:
   - events
   - namespaces
   - namespaces/status
+  - nodes
   - pods
   - pods/log
   - pods/status
