@@ -3,7 +3,7 @@ apiVersion: dsb.dk/v1
 kind: DSBKongApiConfig
 metadata:
   name: api
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.controller.monitorNamespaces }}
 spec:
   title: {{ .Values.mergeApi.title | quote }}
   description:  {{ .Values.mergeApi.description | quote }}
