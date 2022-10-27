@@ -30,7 +30,7 @@ controller:
   kongUpdate: "true"
 
   # Optional list of namespaces to be monitored by this instance usefull when running multiple instances of the controller. 
-  # expects either an empty string "" or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
+  # expects either a an empty string "" (meaning all cluster), a single namespace (when using merge api) or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
   monitorNamespaces: ""
 
   imagePullSecrets: []
