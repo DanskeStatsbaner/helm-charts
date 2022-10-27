@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsb-kong-controller
-appVersion: "1.3.2"
-version: 1.3.2
+appVersion: "1.3.3"
+version: 1.3.3
 description: Automates updating the Kong developer portal when new KongApi's are deployed
 type: application
