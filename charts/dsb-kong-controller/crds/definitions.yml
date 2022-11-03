@@ -83,6 +83,8 @@ spec:
                   type: string
                 securityKeyName:
                   type: string
+                tags:
+                  type: string
   names:
     kind: DSBKongApiConfig
     plural: dsb-kong-api-configs
