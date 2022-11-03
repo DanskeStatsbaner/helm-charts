@@ -13,4 +13,5 @@ spec:
   securityKeyName: {{ .Values.mergeApi.securityKeyName | quote }}
   securityScheme: {{ .Values.mergeApi.securityScheme | quote }}
   termsUrl: {{ .Values.mergeApi.termsUrl | quote }}
+  tags: {{ .Values.mergeApi.tags | quote }}
 {{- end }}
