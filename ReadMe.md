@@ -41,3 +41,12 @@ Read the values file to see more settings:
 ```
 helm show values dsb/dsb-sentry-dashboard
 ```
+
+## DSB Skooner Lite
+Lightweight tool to help developers see their workloads in kubernetes. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.skooner.lite/browse)
+
+Read the values file to see more settings:
+
+```
+helm show values dsb/dsb-skooner-lite
+```
