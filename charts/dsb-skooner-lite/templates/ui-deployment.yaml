@@ -40,10 +40,17 @@ spec:
               value: 'ReadOnly'
             - name: NAMESPACE_FILTERS
               value: {{ .Values.namespaceFilter | quote}}
+            - name: EXCLUDE
+              value: {{ .Values.excludeNamespaces | quote}}
           ports:
             - name: http
               containerPort: 4654
               protocol: TCP
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            runAsUser: 10000
+            runAsGroup: 10000
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

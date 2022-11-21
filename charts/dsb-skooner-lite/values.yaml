@@ -10,12 +10,15 @@ serviceAccount:
   name: ""
 
 image:
-  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.skooner.lite/dsb.skooner.lite.ui:20220919-6-9ef966d"
+  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.skooner.lite/dsb.skooner.lite.ui:20221121-8-f290ea4"
   pullPolicy: IfNotPresent
 
 # Optional list of namespace prefixes to be accessible this instance usefull when running multiple instances of skooner lite. 
 # expects either an empty string "" a single value prefix or a comma seperated list of prefixes without spaces eg "ns1-,ns2-,ns3-"
 namespaceFilter: ""
+
+# Inverts the namespace filter if enabled, defaults to "false". 
+excludeNamespaces: "false"
 
 # Ingress where the portal will be reachable, should follow "skooner.<cluster-name>.<suffix>"
 # where suffix is the clusters ingressSuffix (typically azure.dsb.dk)
