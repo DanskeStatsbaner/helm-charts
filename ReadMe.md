@@ -34,6 +34,8 @@ helm show values dsb/dsb-kong-controller
 ```
 
 ## DSB Kong Ingress
+<b>Not ready for use - currently has hardcoded values for Salescore.</b>
+
 Umbrella Chart that packages the Kong Ingress, statsd along with DSB specific configurations.
 
 This chart assumes you have a cluster running with. Note - these are typically installed by the CCOE:
