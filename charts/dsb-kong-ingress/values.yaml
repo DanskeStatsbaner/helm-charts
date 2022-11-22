@@ -3,6 +3,7 @@
 # You should review and override the following properties
 # - secrets - Assumes use of Azure Secrets CSI driver (https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver)
 # - kong
+# - statsd
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -206,7 +207,7 @@ kong:
       # tls: kong-admin.example.com-tls
       # Ingress hostname
       tls: kong-admin-tls
-      hostname: 
+      hostname: sbx.kong-admin.salescore.azure.dsb.dk
       # Map of ingress annotations.
       annotations: 
         konghq.com/protocols: https
@@ -813,7 +814,7 @@ kong:
 
   # Labels to be added to Kong pods
   podLabels: 
-    aadpodidbinding: ""
+    aadpodidbinding: id-aks-salescore-sbx-kong
 
   # Kong pod count.
   # It has no effect when autoscaling.enabled is set to true

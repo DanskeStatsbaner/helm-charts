@@ -1,7 +1,7 @@
 apiVersion: v2
 name: dsb-kong-ingress
-appVersion: "1.0.0"
-version: 1.0.0
+appVersion: "1.0.1"
+version: 1.0.1
 description: Install the Kong ingress and statsd along with DSB-specific cluster wide plugins
 type: application
 dependencies:
