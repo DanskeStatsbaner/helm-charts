@@ -1,0 +1,23 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: azure-kvname-kong-license
+spec:
+  provider: azure
+  parameters: 
+    usePodIdentity: "true"
+    keyvaultName: "kong-license"
+    cloudName: ""                         
+    objects:  |
+      array:
+        - |
+          objectName: kong-license
+          objectType: secret              # object types: secret, key, or cert
+          objectVersion: ""               # [OPTIONAL] object versions, default to latest if empty
+    tenantId: "f44c53ea-a4c3-499c-bf1e-a1891b565e1d"
+  secretObjects:
+  - data:
+    - key: license
+      objectName: kong-license
+    secretName: kong-enterprise-license
+    type: Opaque
