@@ -51,11 +51,10 @@ At a minimum you should set the following values:
 You can do this with a minimal values file
 ```
 kong:
-    deployment:
-        admin:
-            ingress:
-                tls: <name of the secret with the tls certificate>
-                hostanme: "<env>.kong-admin.<cluster-name>.azure.dsb.dk"
+    admin:
+        ingress:
+            tls: <name of the secret with the tls certificate>
+            hostanme: "<env>.kong-admin.<cluster-name>.azure.dsb.dk"
     podLabels:
         aadpodidbinding: "id-aks-<cluster>-kong"
 ```
