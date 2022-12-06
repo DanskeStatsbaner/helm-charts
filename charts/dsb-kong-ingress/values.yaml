@@ -213,8 +213,8 @@ kong:
         konghq.com/protocols: https
         konghq.com/https-redirect-status-code: "301"
         konghq.com/strip-path: "false"
-        kubernetes.io/tls-acme: "true"
         cert-manager.io/cluster-issuer: letsencrypt
+        certmanager.k8s.io/acme-challenge-type: dns01
       # Ingress path.
       path: /
       # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
