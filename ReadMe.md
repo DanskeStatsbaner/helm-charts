@@ -54,6 +54,7 @@ kong:
     deployment:
         admin:
             ingress:
+                tls: <name of the secret with the tls certificate>
                 hostanme: "<env>.kong-admin.<cluster-name>.azure.dsb.dk"
     podLabels:
         aadpodidbinding: "id-aks-<cluster>-kong"
