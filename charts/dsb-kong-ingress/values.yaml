@@ -206,7 +206,7 @@ kong:
       # TLS secret name.
       # tls: kong-admin.example.com-tls
       # Ingress hostname
-      tls: kong-admin-tls
+      #tls: kong-admin-tls
       hostname: 
       # Map of ingress annotations.
       annotations: 
@@ -813,8 +813,7 @@ kong:
     traffic.sidecar.istio.io/includeInboundPorts: ""
 
   # Labels to be added to Kong pods
-  podLabels: 
-    aadpodidbinding: ""
+  podLabels: {}
 
   # Kong pod count.
   # It has no effect when autoscaling.enabled is set to true
