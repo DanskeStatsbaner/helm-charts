@@ -207,7 +207,7 @@ kong:
       # tls: kong-admin.example.com-tls
       # Ingress hostname
       tls: kong-admin-tls
-      hostname: sbx.kong-admin.salescore.azure.dsb.dk
+      hostname: 
       # Map of ingress annotations.
       annotations: 
         konghq.com/protocols: https
@@ -814,7 +814,7 @@ kong:
 
   # Labels to be added to Kong pods
   podLabels: 
-    aadpodidbinding: id-aks-salescore-sbx-kong
+    aadpodidbinding: ""
 
   # Kong pod count.
   # It has no effect when autoscaling.enabled is set to true
