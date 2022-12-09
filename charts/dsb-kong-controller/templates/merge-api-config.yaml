@@ -14,4 +14,5 @@ spec:
   securityScheme: {{ .Values.mergeApi.securityScheme | quote }}
   termsUrl: {{ .Values.mergeApi.termsUrl | quote }}
   tags: {{ .Values.mergeApi.tags | quote }}
+  prefixFilter:  {{ .Values.mergeApi.prefixFilter | quote }}
 {{- end }}
