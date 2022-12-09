@@ -91,6 +91,9 @@ mergeApi:
 # Optional A "," seperated list of tags applied to the resulting spec
   tags: ""
 
+# Optional beginning segment of endpoints to expose in documentation (eg. "/api/") defaults to empty.
+  prefixFilter: ""
+
 # Optional component to expose the merged swagger definition through an ingress.
 # Enabling this feature deployes a ui service to expose the merged api and creates an ingress to allow access to the documentation.
 portal:
