@@ -293,6 +293,7 @@ kong:
     # "annotations" or "labels" dictionaries below.
     annotations: 
       service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
     # If terminating TLS at the ELB, the following annotations can be used
     # "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "*",
     # "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true",
