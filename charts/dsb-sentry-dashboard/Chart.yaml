@@ -1,6 +1,0 @@
-apiVersion: v2
-name: dsb-sentry-dashboard
-appVersion: "1.5.1"
-version: 1.5.1
-description: Provides an overview of errors for services logging using structure logging (json) in k8s
-type: application
