@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dsb-sentry-dashboard.fullname" . }}
+  name: {{ include "dsb-sentinel-dashboard.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "dsb-sentry-dashboard.labels" . | nindent 4 }}
+    {{- include "dsb-sentinel-dashboard.labels" . | nindent 4 }}
 spec:
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      {{- include "dsb-sentry-dashboard.selectorLabels" . | nindent 6 }}
+      {{- include "dsb-sentinel-dashboard.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "dsb-sentry-dashboard.selectorLabels" . | nindent 8 }}
+        {{- include "dsb-sentinel-dashboard.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -27,7 +27,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ include "dsb-sentry-dashboard.fullname" . }}
+        - name: {{ include "dsb-sentinel-dashboard.fullname" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.image.url }}
