@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dsb-sentinel-dashboard
-appVersion: "1.6.2"
-version: 1.6.2
+appVersion: "1.6.3"
+version: 1.6.3
 description: Provides an overview of errors for services logging using structure logging (json) in k8s
 type: application
