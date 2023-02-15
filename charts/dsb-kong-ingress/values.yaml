@@ -293,7 +293,8 @@ kong:
     # "annotations" or "labels" dictionaries below.
     annotations: 
       service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
+      service.beta.kubernetes.io/port_443_health-probe_protocol: "tcp"
     # If terminating TLS at the ELB, the following annotations can be used
     # "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "*",
     # "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true",
@@ -505,9 +506,10 @@ kong:
   # for Kong specific configuration.
   ingressController:
     enabled: true
+    installCRDs: false
     image:
       repository: kong/kubernetes-ingress-controller
-      tag: "2.6"
+      tag: "2.5"
       # Optionally set a semantic version for version-gated features. This can normally
       # be left unset. You only need to set this if your tag is not a semver string,
       # such as when you are using a "next" tag. Set this to the effective semantic
