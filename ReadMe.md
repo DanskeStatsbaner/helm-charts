@@ -65,13 +65,13 @@ Read the values file to see more settings:
 helm show values dsb/dsb-kong-ingress
 ```
 
-## DSB Sentry Dashboard
-Lightweight tool to help developers work with the output of structured json logs. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.sentry.dashboard/browse)
+## DSB Sentinel Dashboard
+Lightweight tool to help developers work with the output of structured json logs. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.sentinel.dashboard/browse)
 
 Read the values file to see more settings:
 
 ```
-helm show values dsb/dsb-sentry-dashboard
+helm show values dsb/dsb-sentinel-dashboard
 ```
 
 ## DSB Skooner Lite
