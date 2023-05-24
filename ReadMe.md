@@ -34,29 +34,16 @@ Read the values file to see more settings:
 helm show values dsb/dsb-kong-controller
 ```
 
-## DSB Kong Ingress
-Umbrella Chart that packages the Kong Ingress, statsd along with DSB specific configurations.
+## DSB Kong
+Umbrella Chart that packages Kong as an Ingress or gateway, statsd along with DSB specific configurations.
 
-This chart assumes you have a cluster running with. Note - these are typically installed by the CCOE:
+This chart assumes you have a cluster running with the following:
 - [Azure Pod Identity](https://github.com/Azure/aad-pod-identity)
 - [External DNS](https://github.com/kubernetes-sigs/external-dns)
 - [Cert Manager](https://cert-manager.io/docs/)
 - [Azure Secret CSI](https://github.com/Azure/secrets-store-csi-driver-provider-azure)
 
-At a minimum you should set the following values:
-- kong.deployment.admin.ingress.hostname = <env>.kong-admin.<cluster-name>.<domain>
-- kong.podLabels.aadpodidbinding = id-aks-<cluster>-kong
-
-You can do this with a minimal values file
-```
-kong:
-    admin:
-        ingress:
-            tls: <name of the secret with the tls certificate>
-            hostanme: "<env>.kong-admin.<cluster-name>.<domain>"
-    podLabels:
-        aadpodidbinding: "id-aks-<cluster>-kong"
-```
+You can see example values files for various deployments (ingress, data plane, control plane) in the examples folder.
 
 Read the values file to see settings.
 

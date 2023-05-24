@@ -1,0 +1,85 @@
+# -----------------------------------------------------------------------------
+# Example values file to use when installing a Kong data plane. Anything with the # CHANGEME comment should be overridden
+# 
+# Reach out to the Integration COE for help filling this out.
+# -----------------------------------------------------------------------------
+
+# ------
+# Details about secret containing the Kong license
+# ------
+license: 
+  # Override with the tenantId for the azure keyvault containing the license
+  tenantId: "00000000-0000-0000-0000-000000000000" # CHANGEME
+  # Override with the name of the azure keyvault containing the license
+  keyvaultName: "example-license" # CHANGEME
+
+kong:
+# -----------------------------------------------------------------------------
+# Kong parameters
+# -----------------------------------------------------------------------------
+
+  env:
+    # Add the trusted IPs here to allow Kong to communicate with on-prem systems.
+    trusted_ips: CHANGE_ME # CHANGEME
+    role: control_plane
+    cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt # CHANGEME
+    cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key # CHANGEME
+
+  admin:
+    enabled: true
+
+  cluster:
+    enabled: true
+    tls:
+      enabled: true
+
+  clustertelemetry:
+    enabled: true
+    tls:
+      containerPort: 8006
+      enabled: true
+      servicePort: 8006
+      type: ClusterIP
+
+  proxy:
+    enabled: false
+
+  secretVolumes:
+  - kong-cluster-cert
+
+  ingressController:
+    enabled: false
+
+  enterprise:
+    vitals:
+        enabled: false
+    portal:
+      enabled: true
+  manager:
+    enabled: false
+  portal:
+    enabled: true
+  portalapi:
+    enabled: true
+
+  podLabels:
+      # Add the pod identity that Kong should use to access the key vault(s)
+      aadpodidbinding: CHANGEME # CHANGEME
+
+
+prometheus-statsd-exporter:
+  ingress:
+    enabled: false
+    annotations: 
+      kubernetes.io/ingress.class: kong
+      konghq.com/protocols: https
+      konghq.com/https-redirect-status-code: "301"
+      konghq.com/regex-priority: "5"
+    hosts:
+      # Add the host to expose statsd on
+      - host: kong-metrics-exporter.example.com # CHANGEME
+    tls: 
+      # Add the tls host and secret
+      - hosts:
+        - kong-metrics-exporter.example.com # CHANGEME
+        secretName: kong-metrics-exporter-example-com # CHANGEME
