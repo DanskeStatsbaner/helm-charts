@@ -209,12 +209,7 @@ kong:
       #tls: kong-admin-tls
       hostname: 
       # Map of ingress annotations.
-      annotations: 
-        konghq.com/protocols: https
-        konghq.com/https-redirect-status-code: "301"
-        konghq.com/strip-path: "false"
-        cert-manager.io/cluster-issuer: letsencrypt
-        certmanager.k8s.io/acme-challenge-type: dns01
+      annotations: {}
       # Ingress path.
       path: /
       # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
@@ -562,7 +557,13 @@ kong:
 
     ingressClass: kong
     # annotations for IngressClass resource (Kubernetes 1.18+)
-    ingressClassAnnotations: {}
+    ingressClassAnnotations: 
+      konghq.com/protocols: https
+      konghq.com/https-redirect-status-code: "301"
+      konghq.com/strip-path: "false"
+      cert-manager.io/cluster-issuer: letsencrypt
+      certmanager.k8s.io/acme-challenge-type: dns01
+
 
     ## Define any volumes and mounts you want present in the ingress controller container
     ## Volumes are defined above in deployment.userDefinedVolumes
