@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  dsb-kong-ingress:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2023-05-24T10:10:25.895996915Z"
+    dependencies:
+    - name: kong
+      repository: https://charts.konghq.com
+      version: 2.15.2
+    - name: prometheus-statsd-exporter
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 0.7.0
+    description: Install the Kong ingress, statsd, DSB-specific cluster wide plugins
+      and Kong specific gatekeeper policies
+    digest: 4000b6d84690ada61814e651fb553657a5bb25625cad667fa4cb30aff417f949
+    name: dsb-kong-ingress
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-kong-ingress-1.1.0/dsb-kong-ingress-1.1.0.tgz
+    version: 1.1.0
+generated: "2023-05-24T10:10:25.896008881Z"
