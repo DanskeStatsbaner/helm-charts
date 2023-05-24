@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  dsb-kong-controller:
+  - apiVersion: v2
+    appVersion: 1.4.5
+    created: "2023-05-24T10:45:27.436706983Z"
+    description: Automates updating the Kong developer portal when new KongApi's are
+      deployed
+    digest: aecee3e8714c588284fc53cfa19d1da94dca100c66b42bc4d9edb291df350a94
+    name: dsb-kong-controller
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-kong-controller-1.4.5/dsb-kong-controller-1.4.5.tgz
+    version: 1.4.5
   dsb-kong-ingress:
   - apiVersion: v2
     appVersion: 1.1.0
@@ -19,4 +31,27 @@ entries:
     urls:
     - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-kong-ingress-1.1.0/dsb-kong-ingress-1.1.0.tgz
     version: 1.1.0
-generated: "2023-05-24T10:10:25.896008881Z"
+  dsb-sentinel-dashboard:
+  - apiVersion: v2
+    appVersion: 1.6.5
+    created: "2023-05-24T10:45:27.626275089Z"
+    description: Provides an overview of errors for services logging using structure
+      logging (json) in k8s
+    digest: fbc78b67799bcc43f579d2116457a9fa8e92f476be225169e78ad28333860881
+    name: dsb-sentinel-dashboard
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-sentinel-dashboard-1.6.5/dsb-sentinel-dashboard-1.6.5.tgz
+    version: 1.6.5
+  dsb-skooner-lite:
+  - apiVersion: v2
+    appVersion: 1.2.4
+    created: "2023-05-24T10:45:27.833578723Z"
+    description: Allows developers to look but not touch the setup inside kubernetes.
+    digest: 102ee67b22f5d1cec6762ded5573c1752348e34ad7caa33086ed41ec405d43c7
+    name: dsb-skooner-lite
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-skooner-lite-1.2.4/dsb-skooner-lite-1.2.4.tgz
+    version: 1.2.4
+generated: "2023-05-24T10:45:27.833586523Z"
