@@ -10,7 +10,7 @@ Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 Once Helm is set up properly, add the repo as follows:
 
 ```console
-helm repo add dsb https://artifactory.azure.dsb.dk/artifactory/helm/
+helm repo add dsb https://DanskeStatsbaner.github.io/helm-charts/
 ```
 
 You can then run 
@@ -34,8 +34,6 @@ helm show values dsb/dsb-kong-controller
 ```
 
 ## DSB Kong Ingress
-<b>Not ready for use - currently has hardcoded values for Salescore.</b>
-
 Umbrella Chart that packages the Kong Ingress, statsd along with DSB specific configurations.
 
 This chart assumes you have a cluster running with. Note - these are typically installed by the CCOE:
@@ -45,7 +43,7 @@ This chart assumes you have a cluster running with. Note - these are typically i
 - [Azure Secret CSI](https://github.com/Azure/secrets-store-csi-driver-provider-azure)
 
 At a minimum you should set the following values:
-- kong.deployment.admin.ingress.hostname = <env>.kong-admin.<cluster-name>.azure.dsb.dk
+- kong.deployment.admin.ingress.hostname = <env>.kong-admin.<cluster-name>.<domain>
 - kong.podLabels.aadpodidbinding = id-aks-<cluster>-kong
 
 You can do this with a minimal values file
@@ -54,19 +52,19 @@ kong:
     admin:
         ingress:
             tls: <name of the secret with the tls certificate>
-            hostanme: "<env>.kong-admin.<cluster-name>.azure.dsb.dk"
+            hostanme: "<env>.kong-admin.<cluster-name>.<domain>"
     podLabels:
         aadpodidbinding: "id-aks-<cluster>-kong"
 ```
 
-Read the values file to see more settings:
+Read the values file to see settings.
 
 ```
 helm show values dsb/dsb-kong-ingress
 ```
 
 ## DSB Sentinel Dashboard
-Lightweight tool to help developers work with the output of structured json logs. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.sentinel.dashboard/browse)
+Lightweight tool to help developers work with the output of structured json logs. [(more here)](https://github.com/DanskeStatsbaner/tool-dsb-sentinel-dashboard)
 
 Read the values file to see more settings:
 
@@ -75,7 +73,7 @@ helm show values dsb/dsb-sentinel-dashboard
 ```
 
 ## DSB Skooner Lite
-Lightweight tool to help developers see their workloads in kubernetes. [(more here)](https://bitbucket.dsb.dk/projects/DOT/repos/dsb.skooner.lite/browse)
+Lightweight tool to help developers see their workloads in kubernetes. [(more here)](https://github.com/DanskeStatsbaner/tool-dsb-skooner-lite)
 
 Read the values file to see more settings:
 
