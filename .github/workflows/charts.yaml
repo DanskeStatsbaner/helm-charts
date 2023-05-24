@@ -11,7 +11,7 @@ on:
 jobs:
   release:
     name: Release
-    runs-on: k8s
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
