@@ -6,7 +6,7 @@ spec:
   provider: azure
   parameters: 
     usePodIdentity: "true"
-    keyvaultName: "kong-license"
+    keyvaultName: {{ .Values.license.keyvaultName | quote }}
     cloudName: ""                         
     objects:  |
       array:
@@ -14,7 +14,7 @@ spec:
           objectName: kong-license
           objectType: secret              # object types: secret, key, or cert
           objectVersion: ""               # [OPTIONAL] object versions, default to latest if empty
-    tenantId: "f44c53ea-a4c3-499c-bf1e-a1891b565e1d"
+    tenantId: {{ .Values.license.tenantId | quote }}
   secretObjects:
   - data:
     - key: license

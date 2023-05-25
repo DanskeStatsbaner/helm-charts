@@ -1,0 +1,66 @@
+# -----------------------------------------------------------------------------
+# Example values file to use when installing a Kong ingress. All these values should be overridden
+# 
+# Reach out to the Integration COE for help filling this out.
+# -----------------------------------------------------------------------------
+
+# ------
+# Details about secret containing the Kong license
+# ------
+license: 
+  # Override with the tenantId for the azure keyvault containing the license
+  tenantId: "00000000-0000-0000-0000-000000000000" # CHANGEME
+  # Override with the name of the azure keyvault containing the license
+  keyvaultName: "example-license" # CHANGEME
+kong:
+# -----------------------------------------------------------------------------
+# Kong parameters
+# -----------------------------------------------------------------------------
+
+  env:
+      # Add the trusted IPs here to allow Kong to communicate with on-prem systems.
+      trusted_ips: CHANGE_ME # CHANGEME
+
+
+  admin:
+    enabled: true
+    http:
+      enabled: true
+    tls:
+      enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: kong
+      # Kong-admin needs its own certificate. Add its tls secret created by cert-manager as well as the hostname and scret name
+      tls: cert-kong-admin-example.com # CHANGEME
+      hostname: kong-admin.example.com # CHANGEME
+      secretName: kong-admin-example-com # CHANGEME
+
+  enterprise:
+    vitals:
+        enabled: true
+    portal:
+      enabled: false
+  manager:
+    enabled: false
+  portal:
+    enabled: false
+  portalapi:
+    enabled: false
+
+  podLabels:
+      # Add the pod identity that Kong should use to access the key vault(s)
+      aadpodidbinding: CHANGEME # CHANGEME
+
+
+prometheus-statsd-exporter:
+  ingress:
+    enabled: true
+    hosts:
+      # Add the host to expose statsd on
+      - host: kong-metrics-exporter.example.com # CHANGEME
+    tls: 
+      # Add the tls host and secret
+      - hosts:
+        - kong-metrics-exporter.example.com # CHANGEME
+        secretName: kong-metrics-exporter-example-com # CHANGEME
