@@ -1,5 +1,24 @@
 apiVersion: v1
 entries:
+  dsb-kong:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-05-25T23:24:06.893805622Z"
+    dependencies:
+    - name: kong
+      repository: https://charts.konghq.com
+      version: 2.22.0
+    - name: prometheus-statsd-exporter
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 0.8.0
+    description: Install the Kong, statsd, DSB-specific cluster wide plugins and Kong
+      specific gatekeeper policies
+    digest: f54ea5d4b806330182365325221b55bb2ea3c6da2cebab66d52072b716fc2cdc
+    name: dsb-kong
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-kong-2.0.0/dsb-kong-2.0.0.tgz
+    version: 2.0.0
   dsb-kong-controller:
   - apiVersion: v2
     appVersion: 1.4.5
@@ -54,4 +73,4 @@ entries:
     urls:
     - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-skooner-lite-1.2.4/dsb-skooner-lite-1.2.4.tgz
     version: 1.2.4
-generated: "2023-05-24T10:45:27.833586523Z"
+generated: "2023-05-25T23:24:06.893819029Z"
