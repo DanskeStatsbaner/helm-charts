@@ -12,6 +12,7 @@ license:
   tenantId: "00000000-0000-0000-0000-000000000000" # CHANGEME
   # Override with the name of the azure keyvault containing the license
   keyvaultName: "example-license" # CHANGEME
+
 kong:
 # -----------------------------------------------------------------------------
 # Kong parameters
@@ -20,7 +21,6 @@ kong:
   env:
       # Add the trusted IPs here to allow Kong to communicate with on-prem systems.
       trusted_ips: CHANGE_ME # CHANGEME
-
 
   admin:
     enabled: true
@@ -51,7 +51,6 @@ kong:
   podLabels:
       # Add the pod identity that Kong should use to access the key vault(s)
       aadpodidbinding: CHANGEME # CHANGEME
-
 
 prometheus-statsd-exporter:
   ingress:
