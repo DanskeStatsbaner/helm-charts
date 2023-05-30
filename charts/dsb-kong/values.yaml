@@ -983,8 +983,8 @@ kong:
     # interval: 10s
     # Specifies namespace, where ServiceMonitor should be installed
     namespace: metrics
-    # labels:
-    #   foo: bar
+    labels:
+      release: prometheus
     # targetLabels:
     #   - foo
 
@@ -1238,6 +1238,8 @@ kong:
       latency_metrics: true
       bandwidth_metrics: true
       upstream_health_metrics: true
+    labels:  
+      global: "true"
     plugin: prometheus
   - apiVersion: configuration.konghq.com/v1
     kind: KongClusterPlugin
@@ -1437,12 +1439,13 @@ prometheus-statsd-exporter:
       endpoint: "/metrics"
 
   serviceMonitor:
-    enabled: false
+    enabled: true
     interval: 30s
     scrapeTimeout: 10s
-    namespace: monitoring
+    namespace: metrics
     honorLabels: false
-    additionalLabels: {}
+    additionalLabels: 
+      release: prometheus
     ## resource kind(defaults to "ServiceMonitor")
     kind: ""
     # MetricRelabelConfigs to apply to samples before ingestion
