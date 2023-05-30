@@ -48,7 +48,7 @@ You can see example values files for various deployments (ingress, data plane, c
 Read the values file to see settings.
 
 ```
-helm show values dsb/dsb-kong-ingress
+helm show values dsb/dsb-kong
 ```
 
 ## DSB Sentinel Dashboard

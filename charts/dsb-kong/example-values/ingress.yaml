@@ -59,6 +59,9 @@ prometheus-statsd-exporter:
     hosts:
       # Add the host to expose statsd on
       - host: kong-metrics-exporter.example.com # CHANGEME
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
     tls: 
       # Add the tls host and secret
       - hosts:
