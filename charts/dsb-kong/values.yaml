@@ -227,6 +227,7 @@ kong:
       # Map of ingress annotations.
       annotations: 
         konghq.com/protocols: "https"
+        cert-manager.io/cluster-issuer: letsencrypt
       # Ingress path.
       path: /
       # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
@@ -561,11 +562,11 @@ kong:
       anonymous_reports: false
       # If using Kong Enterprise with RBAC enabled, uncomment the section below
       # and specify the secret/key containing your admin token.
-      kong_admin_token:
-        valueFrom:
-          secretKeyRef:
-            name: kong-kong-token
-            key: token 
+      # kong_admin_token:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: kong-kong-token
+      #       key: token 
 
     # This section is any customer specific environments variables that doesn't require CONTROLLER_ prefix.
     # Example as below, uncomment if required and add additional attributes as required.
@@ -815,8 +816,8 @@ kong:
       cpu: 2
       memory: 3G
     requests:
-      cpu: 500m
-      memory: 300Mi
+      cpu: 2
+      memory: 3G
     # limits:
     #  cpu: 1
     #  memory: 2G
@@ -1484,7 +1485,7 @@ prometheus-statsd-exporter:
     annotations: {}
 
   ingress:
-    enabled: true
+    enabled: false
     className: "kong"
     annotations: 
       konghq.com/protocols: https
