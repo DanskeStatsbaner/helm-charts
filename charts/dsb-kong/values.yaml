@@ -890,7 +890,10 @@ kong:
     prometheus.io/scrape: true
 
   # Labels to be added to Kong pods
-  podLabels: {}
+  podLabels: 
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: true
 
   # Kong pod count.
   # It has no effect when autoscaling.enabled is set to true
@@ -1474,8 +1477,8 @@ prometheus-statsd-exporter:
 
   # Extra labels to be added to pods
   podLabels: 
-    prometheus.io/path: /metrics
-    prometheus.io/port: 8080
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"
     prometheus.io/scrape: true
 
 
