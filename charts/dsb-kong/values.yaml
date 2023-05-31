@@ -126,7 +126,7 @@ kong:
     real_ip_recursive: "on"
     anonymous_reports: "off"
     vitals_strategy: prometheus
-    vitals_statsd_address: statsd-prometheus-statsd-exporter.kong:9125
+    vitals_statsd_address: kong-prometheus-statsd-exporter.kong:9125
     vitals_tsdb_address: prometheus-server.prometheus:80
     vitals_statsd_prefix: kong
     ssl_cipher_suite: intermediate #Set based on recomendation in Kong hardening checklist
@@ -227,6 +227,7 @@ kong:
       # Map of ingress annotations.
       annotations: 
         konghq.com/protocols: "https"
+        cert-manager.io/cluster-issuer: letsencrypt
       # Ingress path.
       path: /
       # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
@@ -561,11 +562,11 @@ kong:
       anonymous_reports: false
       # If using Kong Enterprise with RBAC enabled, uncomment the section below
       # and specify the secret/key containing your admin token.
-      kong_admin_token:
-        valueFrom:
-          secretKeyRef:
-            name: kong-kong-token
-            key: token 
+      # kong_admin_token:
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: kong-kong-token
+      #       key: token 
 
     # This section is any customer specific environments variables that doesn't require CONTROLLER_ prefix.
     # Example as below, uncomment if required and add additional attributes as required.
@@ -815,8 +816,8 @@ kong:
       cpu: 2
       memory: 3G
     requests:
-      cpu: 500m
-      memory: 300Mi
+      cpu: 2
+      memory: 3G
     # limits:
     #  cpu: 1
     #  memory: 2G
@@ -884,9 +885,15 @@ kong:
   podAnnotations:
     kuma.io/gateway: enabled
     traffic.sidecar.istio.io/includeInboundPorts: ""
+    prometheus.io/path: /metrics
+    prometheus.io/port: 8080
+    prometheus.io/scrape: true
 
   # Labels to be added to Kong pods
-  podLabels: {}
+  podLabels: 
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
 
   # Kong pod count.
   # It has no effect when autoscaling.enabled is set to true
@@ -981,9 +988,9 @@ kong:
     enabled: false
     # interval: 10s
     # Specifies namespace, where ServiceMonitor should be installed
-    # namespace: monitoring
-    # labels:
-    #   foo: bar
+    namespace: metrics
+    labels:
+      release: prometheus
     # targetLabels:
     #   - foo
 
@@ -1230,18 +1237,24 @@ kong:
   - apiVersion: configuration.konghq.com/v1
     kind: KongClusterPlugin
     metadata:
+      labels:  
+        global: "true"
       name: prometheus
     config:
       per_consumer: false
+      status_code_metrics: true
+      latency_metrics: true
+      bandwidth_metrics: true
+      upstream_health_metrics: true
     plugin: prometheus
   - apiVersion: configuration.konghq.com/v1
     kind: KongClusterPlugin
     metadata:
+      labels:
+        global: "true"
       name: correlation-id-global-plugin
       annotations:
         kubernetes.io/ingress.class: kong
-      labels:
-        global: "true"
     config: 
       echo_downstream: true
       generator: uuid
@@ -1435,11 +1448,12 @@ prometheus-statsd-exporter:
     enabled: false
     interval: 30s
     scrapeTimeout: 10s
-    namespace: monitoring
+    namespace: metrics
     honorLabels: false
-    additionalLabels: {}
+    additionalLabels: 
+      release: prometheus
     ## resource kind(defaults to "ServiceMonitor")
-    kind: ""
+    kind: "ServiceMonitor"
     # MetricRelabelConfigs to apply to samples before ingestion
     metricRelabelings: []
     # RelabelConfigs to apply to samples before scraping.
@@ -1462,7 +1476,11 @@ prometheus-statsd-exporter:
   podAnnotations: {}
 
   # Extra labels to be added to pods
-  podLabels: {}
+  podLabels: 
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+
 
   podSecurityContext: {}
     # fsGroup: 2000
@@ -1484,18 +1502,12 @@ prometheus-statsd-exporter:
     annotations: {}
 
   ingress:
-    enabled: true
-    className: ""
+    enabled: false
+    className: "kong"
     annotations: 
-      kubernetes.io/ingress.class: kong
       konghq.com/protocols: https
       konghq.com/https-redirect-status-code: "301"
       konghq.com/regex-priority: "5"
-    hosts:
-      - host: 
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
