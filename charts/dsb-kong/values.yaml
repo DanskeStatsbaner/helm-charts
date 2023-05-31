@@ -1231,6 +1231,8 @@ kong:
   - apiVersion: configuration.konghq.com/v1
     kind: KongClusterPlugin
     metadata:
+      labels:  
+        global: "true"
       name: prometheus
     config:
       per_consumer: false
@@ -1238,17 +1240,15 @@ kong:
       latency_metrics: true
       bandwidth_metrics: true
       upstream_health_metrics: true
-    labels:  
-      global: "true"
     plugin: prometheus
   - apiVersion: configuration.konghq.com/v1
     kind: KongClusterPlugin
     metadata:
+      labels:
+        global: "true"
       name: correlation-id-global-plugin
       annotations:
         kubernetes.io/ingress.class: kong
-      labels:
-        global: "true"
     config: 
       echo_downstream: true
       generator: uuid
