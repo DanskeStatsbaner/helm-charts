@@ -893,7 +893,7 @@ kong:
   podLabels: 
     prometheus.io/path: "/metrics"
     prometheus.io/port: "8080"
-    prometheus.io/scrape: true
+    prometheus.io/scrape: "true"
 
   # Kong pod count.
   # It has no effect when autoscaling.enabled is set to true
@@ -1479,7 +1479,7 @@ prometheus-statsd-exporter:
   podLabels: 
     prometheus.io/path: "/metrics"
     prometheus.io/port: "8080"
-    prometheus.io/scrape: true
+    prometheus.io/scrape: "true"
 
 
   podSecurityContext: {}
