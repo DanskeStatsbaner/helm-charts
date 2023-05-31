@@ -126,7 +126,7 @@ kong:
     real_ip_recursive: "on"
     anonymous_reports: "off"
     vitals_strategy: prometheus
-    vitals_statsd_address: statsd-prometheus-statsd-exporter.kong:9125
+    vitals_statsd_address: kong-prometheus-statsd-exporter.kong:9125
     vitals_tsdb_address: prometheus-server.prometheus:80
     vitals_statsd_prefix: kong
     ssl_cipher_suite: intermediate #Set based on recomendation in Kong hardening checklist

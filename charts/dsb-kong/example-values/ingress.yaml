@@ -21,6 +21,7 @@ kong:
   env:
       # Add the trusted IPs here to allow Kong to communicate with on-prem systems.
       trusted_ips: CHANGE_ME # CHANGEME
+      vitals_tsdb_address: prometheus-server.prometheus:80 # CHANGEME - should be the service for the prometheus server running on the cluster
 
   admin:
     enabled: true
