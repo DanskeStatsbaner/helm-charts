@@ -141,6 +141,9 @@ portal:
   # where namespace is the controllers monitored namespace, and suffix is the controllers ingressSuffix
   ingress: ""
 
+  # name of the secret use for tls
+  tls: ""
+
   # Ingress class for the deployed ingress
   ingressClassName: "kong"
 
