@@ -10,7 +10,7 @@ serviceAccount:
   name: ""
 
 image:
-  url: "dsbregistry.azurecr.io/tools/dsb.skooner.lite/dsb.skooner.lite:20230524-38-2ed6679-main"
+  url: "dsbregistry.azurecr.io/tools/dsb-skooner-lite/dsb-skooner-lite:20230601-39-806bdc6-main"
   pullPolicy: IfNotPresent
 
 # Optional list of namespace prefixes to be accessible this instance usefull when running multiple instances of skooner lite. 
