@@ -82,6 +82,16 @@ entries:
     version: 1.6.5
   dsb-skooner-lite:
   - apiVersion: v2
+    appVersion: 1.2.8
+    created: "2023-06-01T14:40:29.866774379Z"
+    description: Allows developers to look but not touch the setup inside kubernetes.
+    digest: 586e83c1bf0785cf4b917a5398e12ca85e2a1d510d7c189961384bd5b30ae673
+    name: dsb-skooner-lite
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-skooner-lite-1.2.8/dsb-skooner-lite-1.2.8.tgz
+    version: 1.2.8
+  - apiVersion: v2
     appVersion: 1.2.7
     created: "2023-06-01T14:18:57.545145083Z"
     description: Allows developers to look but not touch the setup inside kubernetes.
@@ -121,4 +131,4 @@ entries:
     urls:
     - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-skooner-lite-1.2.4/dsb-skooner-lite-1.2.4.tgz
     version: 1.2.4
-generated: "2023-06-01T14:18:57.545166584Z"
+generated: "2023-06-01T14:40:29.866816282Z"
