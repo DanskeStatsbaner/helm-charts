@@ -92,6 +92,17 @@ entries:
     version: 1.1.0
   dsb-sentinel-dashboard:
   - apiVersion: v2
+    appVersion: 1.6.7
+    created: "2023-06-01T22:42:03.301638135Z"
+    description: Provides an overview of errors for services logging using structure
+      logging (json) in k8s
+    digest: 128b2bed15112b4c0a4343e2367c40378fada01a10950027d7df968defc42168
+    name: dsb-sentinel-dashboard
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-sentinel-dashboard-1.6.7/dsb-sentinel-dashboard-1.6.7.tgz
+    version: 1.6.7
+  - apiVersion: v2
     appVersion: 1.6.5
     created: "2023-05-24T10:45:27.626275089Z"
     description: Provides an overview of errors for services logging using structure
@@ -153,4 +164,4 @@ entries:
     urls:
     - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-skooner-lite-1.2.4/dsb-skooner-lite-1.2.4.tgz
     version: 1.2.4
-generated: "2023-06-01T15:47:55.198833304Z"
+generated: "2023-06-01T22:42:03.301659035Z"
