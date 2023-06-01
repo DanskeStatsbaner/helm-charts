@@ -11,7 +11,7 @@ serviceAccount:
 
 controller:
   image:
-    url: "dsbregistry.azurecr.io/tools/dsb-kong-controller/dsb-kong-controller:20230601-11-f1e352b-main"
+    url: "dsbregistry.azurecr.io/tools/dsb-kong-controller/dsb-kong-controller:20230601-12-c2c8908-main"
     pullPolicy: IfNotPresent
 
   # Specify the ingress suffix (eg. azure.dsb.dk) of API's deployed to the cluster that this instance of the portal controller will handle.
@@ -98,7 +98,7 @@ mergeApi:
 # Enabling this feature deployes a ui service to expose the merged api and creates an ingress to allow access to the documentation.
 portal:
   image:
-    url: "dsbregistry.azurecr.io/tools/dsb-kong-portal-ui/dsb-kong-portal-ui:20230601-11-f1e352b-main"
+    url: "dsbregistry.azurecr.io/tools/dsb-kong-portal-ui/dsb-kong-portal-ui:20230601-12-c2c8908-main"
     pullPolicy: IfNotPresent
 
   enabled: false
