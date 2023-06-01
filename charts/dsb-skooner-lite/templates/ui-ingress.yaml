@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingress }}
-      secretName: {{ include "dsb-skooner-lite.fullname" . }}
+      secretName: {{ .Values.tls }}
   rules:
     - host: {{ .Values.ingress }}
       http:
