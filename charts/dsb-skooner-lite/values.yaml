@@ -20,7 +20,9 @@ namespaceFilter: ""
 # Inverts the namespace filter if enabled, defaults to "false". 
 excludeNamespaces: "false"
 
+# name of the secret use for tls
 tls: ""
+
 # Ingress where the portal will be reachable, should follow "skooner.<cluster-name>.<suffix>"
 # where suffix is the clusters ingressSuffix (typically azure.dsb.dk)
 ingress: ""

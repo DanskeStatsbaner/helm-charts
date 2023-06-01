@@ -3,7 +3,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  url: "artifactory.azure.dsb.dk:443/docker-local/dsb.sentinel.dashboard/dsb.sentinel.dashboard.ui:20230201-6-bdfa11e"
+  url: "dsbregistry.azurecr.io/tools/dsb-sentinel-dashboard/dsb-sentinel-dashboard:20230601-3-229595b-main"
   pullPolicy: IfNotPresent
 
 # Humio api url optional defaults to ("https://cloud.humio.com")
@@ -18,6 +18,9 @@ humioRepository: ""
 # Optional list of namespace prefixes to be accessible this instance usefull when running multiple instances of the portal. 
 # expects either an empty string "" a single value prefix or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
 namespaceFilter: ""
+
+# name of the secret used for tls
+tls: ""
 
 # Ingress where the portal will be reachable, should follow "sentry.<namespace>.<suffix>"
 # where namespace is the controllers monitored namespace, and suffix is the clusters ingressSuffix (typically azure.dsb.dk)
