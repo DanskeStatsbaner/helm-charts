@@ -19,6 +19,9 @@ humioRepository: ""
 # expects either an empty string "" a single value prefix or a comma seperated list of namespaces without spaces eg "ns-1,ns-2,ns-3"
 namespaceFilter: ""
 
+# name of the secret used for tls
+tls: ""
+
 # Ingress where the portal will be reachable, should follow "sentry.<namespace>.<suffix>"
 # where namespace is the controllers monitored namespace, and suffix is the clusters ingressSuffix (typically azure.dsb.dk)
 ingress: ""
