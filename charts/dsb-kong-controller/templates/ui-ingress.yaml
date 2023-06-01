@@ -13,7 +13,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.portal.ingress }}
-      secretName: {{ include "dsb-kong-controller.portal.fullname" . }}
+      secretName: {{ .Values.portal.tls }}
   rules:
     - host: {{ .Values.portal.ingress }}
       http:

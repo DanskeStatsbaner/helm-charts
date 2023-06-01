@@ -11,7 +11,7 @@ serviceAccount:
 
 controller:
   image:
-    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.controller:20221209-98-45fa432"
+    url: "dsbregistry.azurecr.io/tools/dsb-kong-controller/dsb-kong-controller:20230601-11-f1e352b-main"
     pullPolicy: IfNotPresent
 
   # Specify the ingress suffix (eg. azure.dsb.dk) of API's deployed to the cluster that this instance of the portal controller will handle.
@@ -98,7 +98,7 @@ mergeApi:
 # Enabling this feature deployes a ui service to expose the merged api and creates an ingress to allow access to the documentation.
 portal:
   image:
-    url: "artifactory.azure.dsb.dk:443/docker-local/dsb.kong.controller/dsb.kong.portal.ui:20221209-98-45fa432"
+    url: "dsbregistry.azurecr.io/tools/dsb-kong-portal-ui/dsb-kong-portal-ui:20230601-11-f1e352b-main"
     pullPolicy: IfNotPresent
 
   enabled: false
@@ -140,6 +140,9 @@ portal:
   # Ingress for the merged api is used to expose a swagger defintion at the provided endpoint, should follow "api.<namespace>.<suffix>"
   # where namespace is the controllers monitored namespace, and suffix is the controllers ingressSuffix
   ingress: ""
+
+  # name of the secret use for tls
+  tls: ""
 
   # Ingress class for the deployed ingress
   ingressClassName: "kong"
