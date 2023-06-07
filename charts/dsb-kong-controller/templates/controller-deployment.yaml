@@ -36,8 +36,8 @@ spec:
           resources:
             {{- toYaml .Values.controller.resources | nindent 12 }}
           env: 
-            - name: ingress-suffix
-              value: {{ .Values.controller.ingressSuffix | quote }}
+            - name: portal-ingress
+              value: {{ .Values.portal.ingress | quote }}
             - name: kong-token
               valueFrom:
                 secretKeyRef:
