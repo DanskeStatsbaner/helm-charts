@@ -39,6 +39,17 @@ entries:
     version: 2.0.0
   dsb-kong-controller:
   - apiVersion: v2
+    appVersion: 1.4.9
+    created: "2023-06-07T09:51:02.379798775Z"
+    description: Automates updating the Kong developer portal when new KongApi's are
+      deployed
+    digest: a659cdb07f42d40853b9bbe64e623a38183486b92977c458845ec2148c53377c
+    name: dsb-kong-controller
+    type: application
+    urls:
+    - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-kong-controller-1.4.9/dsb-kong-controller-1.4.9.tgz
+    version: 1.4.9
+  - apiVersion: v2
     appVersion: 1.4.8
     created: "2023-06-07T08:20:14.014131807Z"
     description: Automates updating the Kong developer portal when new KongApi's are
@@ -175,4 +186,4 @@ entries:
     urls:
     - https://github.com/DanskeStatsbaner/helm-charts/releases/download/dsb-skooner-lite-1.2.4/dsb-skooner-lite-1.2.4.tgz
     version: 1.2.4
-generated: "2023-06-07T08:20:14.014165309Z"
+generated: "2023-06-07T09:51:02.379831576Z"
