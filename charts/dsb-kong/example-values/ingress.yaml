@@ -4,42 +4,38 @@
 # Reach out to the Integration COE for help filling this out.
 # -----------------------------------------------------------------------------
 
-# ------
-# Details about secret containing the Kong license
-# ------
-license: 
-  # Override with the tenantId for the azure keyvault containing the license
-  tenantId: "00000000-0000-0000-0000-000000000000" # CHANGEME
-  # Override with the name of the azure keyvault containing the license
-  keyvaultName: "example-license" # CHANGEME
-
 kong:
-# -----------------------------------------------------------------------------
-# Kong parameters
-# -----------------------------------------------------------------------------
+  # -----------------------------------------------------------------------------
+  # Kong parameters
+  # -----------------------------------------------------------------------------
 
   env:
-      # Add the trusted IPs here to allow Kong to communicate with on-prem systems.
-      trusted_ips: CHANGE_ME # CHANGEME
-      vitals_tsdb_address: prometheus-server.prometheus:80 # CHANGEME - should be the service for the prometheus server running on the cluster
+    # Add the trusted IPs here to allow Kong to communicate with on-prem systems.
+    trusted_ips: CHANGE_ME # Add the trusted IPs here.
+    vitals_statsd_address: CHANGEME:9125 # The path to the statsd statsd-exporter service Ex. kong-prometheus-statsd-exporter.kong:9125
+    vitals_tsdb_address: CHANGEME:80 # The path to prometheus Ex. prometheus-server.monitoring:80
 
   admin:
     enabled: true
     http:
       enabled: true
     tls:
-      enabled: true
+      enabled: false
     ingress:
       enabled: true
-      ingressClassName: kong
-      # Kong-admin needs its own certificate. Add its tls secret created by cert-manager as well as the hostname and scret name
-      tls: cert-kong-admin-example.com # CHANGEME
-      hostname: kong-admin.example.com # CHANGEME
-      secretName: kong-admin-example-com # CHANGEME
+      # TLS secret name.
+      tls: CHANGEME-cert # Set the default certificate for the admin api
+      # Ingress hostname
+      hostname: CHANGEME.azure.dsb.dk # Set the hostname for the admin api
 
+  proxy:
+    enabled: false
+  ingressController:
+    enabled: true
   enterprise:
+    enabled: true
     vitals:
-        enabled: true
+      enabled: true
     portal:
       enabled: false
   manager:
@@ -50,29 +46,12 @@ kong:
     enabled: false
 
   podLabels:
-      # Add the pod identity that Kong should use to access the key vault(s)
-      aadpodidbinding: CHANGEME # CHANGEME
-
-  serviceMonitor:
-    # Specifies whether ServiceMonitor for Prometheus operator should be created
-    # If you wish to gather metrics from a Kong instance with the proxy disabled (such as a hybrid control plane), see:
-    # https://github.com/Kong/charts/blob/main/charts/kong/README.md#prometheus-operator-integration
-    enabled: true
-    # interval: 10s
-    # Specifies namespace, where ServiceMonitor should be installed
-    namespace: metrics
+    # Add the pod identity that Kong should use to access the key vault(s)
+    aadpodidbinding: CHANGEME # CHANGEME
 
 prometheus-statsd-exporter:
   ingress:
     enabled: true
     hosts:
       # Add the host to expose statsd on
-      - host: kong-metrics-exporter.example.com # CHANGEME
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls: 
-      # Add the tls host and secret
-      - hosts:
-        - kong-metrics-exporter.example.com # CHANGEME
-        secretName: kong-metrics-exporter-example-com # CHANGEME
+      - host: CHANGEME # CHANGEME
