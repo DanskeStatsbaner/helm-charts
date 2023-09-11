@@ -1,0 +1,25 @@
+{{- if eq (toString .Values.license.enabled) "true" -}}
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: azure-kvname-kong-license
+spec:
+  provider: azure
+  parameters: 
+    usePodIdentity: "true"
+    keyvaultName: {{ .Values.license.keyvault.name | quote }}
+    cloudName: ""                         
+    objects:  |
+      array:
+        - |
+          objectName: kong-license
+          objectType: secret              # object types: secret, key, or cert
+          objectVersion: ""               # [OPTIONAL] object versions, default to latest if empty
+    tenantId: {{ .Values.license.keyvault.tenantId | quote }}
+  secretObjects:
+  - data:
+    - key: license
+      objectName: kong-license
+    secretName: kong-enterprise-license
+    type: Opaque
+{{- end -}}

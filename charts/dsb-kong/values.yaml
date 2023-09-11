@@ -5,8 +5,19 @@
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
+# Allows the chart to automatically create the secret provider class used by 
+# Azure Secrets CSI Driver
+# -----------------------------------------------------------------------------
+license:
+  enabled: true
+  keyvault:
+    name: CHANGEME # The name of the key vault
+    tenantId: CHANGEME # The guid for the tenant
+
+# -----------------------------------------------------------------------------
 # Kong parameters
-# Default values for DSB Kong Ingress based on Kong's helm chart 2.65.5
+# Default values for DSB Kong based on Kong's helm chart 2.65.5
+# -----------------------------------------------------------------------------
 kong:
   # -----------------------------------------------------------------------------
   # Default values for Kong's Helm Chart.
@@ -58,13 +69,22 @@ kong:
     #   - "foo.local"
     #   - "bar.local"
 
-    ## Define any volumes and mounts you want present in the Kong proxy container
-    # userDefinedVolumes:
-    # - name: "volumeName"
-    #   emptyDir: {}
-    # userDefinedVolumeMounts:
-    # - name: "volumeName"
-    #   mountPath: "/opt/user/dir/mount"
+    # Define any volumes and mounts you want present in the Kong proxy container
+    # Uncomment this setion if not using the Azure CSI driver
+    # userDefinedVolumes: {}
+    # userDefinedVolumeMounts: {}
+    # And comment this out
+    userDefinedVolumes:
+    - name: secrets-kong-license-inline
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "azure-kvname-kong-license"
+    userDefinedVolumeMounts:
+    - name: secrets-kong-license-inline
+      mountPath: "/mnt/secrets-store"
+      readOnly: true
     test:
       # Enable creation of test resources for use with "helm test"
       enabled: false
