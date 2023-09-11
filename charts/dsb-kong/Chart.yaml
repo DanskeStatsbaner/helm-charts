@@ -1,7 +1,7 @@
 apiVersion: v2
 name: dsb-kong
-appVersion: "3.0.0"
-version: 3.0.0
+appVersion: "3.1.0"
+version: 3.1.0
 description: Install the Kong, statsd, DSB-specific cluster wide plugins and Kong specific gatekeeper policies
 type: application
 dependencies:
