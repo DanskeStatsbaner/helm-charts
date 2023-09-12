@@ -596,6 +596,7 @@ kong:
       # generates self-signed certificates by default. Set this to false once you
       # have installed CA-signed certificates.
       kong_admin_tls_skip_verify: true
+      anonymous_reports: "false"
       # If using Kong Enterprise with RBAC enabled, uncomment the section below
       # and specify the secret/key containing your admin token.
       # kong_admin_token:
@@ -891,11 +892,13 @@ kong:
         command:
           - kong
           - quit
+          - '--prefix=/kong_prefix'
           - '--wait=15'
+          - '--timeout=30'
 
   # Sets the termination grace period for pods spawned by the Kubernetes Deployment.
   # Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#hook-handler-execution
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 60
 
   # Affinity for pod assignment
   # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
@@ -943,7 +946,7 @@ kong:
     maxReplicas: 5
     behavior: {}
     ## targetCPUUtilizationPercentage only used if the cluster doesn't support autoscaling/v2 or autoscaling/v2beta
-    targetCPUUtilizationPercentage:
+    # targetCPUUtilizationPercentage:
     ## Otherwise for clusters that do support autoscaling/v2 or autoscaling/v2beta, use metrics
     metrics:
       - type: Resource
@@ -1267,56 +1270,7 @@ kong:
   #   mountPath: /mount/to/my/location
   #   subPath: my-subpath # Optional, if you wish to mount a single key and not the entire ConfigMap
 
-  extraObjects: 
-  - apiVersion: configuration.konghq.com/v1
-    kind: KongClusterPlugin
-    metadata:
-      labels:  
-        global: "true"
-      name: prometheus
-    config:
-      per_consumer: false
-      status_code_metrics: true
-      latency_metrics: true
-      bandwidth_metrics: true
-      upstream_health_metrics: true
-    plugin: prometheus
-  - apiVersion: configuration.konghq.com/v1
-    kind: KongClusterPlugin
-    metadata:
-      labels:
-        global: "true"
-      name: correlation-id-global-plugin
-      annotations:
-        kubernetes.io/ingress.class: kong
-    config: 
-      echo_downstream: true
-      generator: uuid
-      header_name: X-DSB-Correlation-ID
-    plugin: correlation-id
-  - apiVersion: configuration.konghq.com/v1
-    kind: KongClusterPlugin
-    metadata:
-      name: oidc-verify-signature
-      annotations:
-        kubernetes.io/ingress.class: kong
-    config: 
-      auth_methods: 
-      - bearer
-      issuer: https://login.microsoftonline.com/dsbintranet.onmicrosoft.com/.well-known/openid-configuration
-    plugin: openid-connect
-  - apiVersion: configuration.konghq.com/v1
-    kind: KongClusterPlugin
-    metadata:
-      name: kong-requst-logging
-      annotations:
-        kubernetes.io/ingress.class: kong
-      labels:
-        global: "true"
-    config: 
-      path: /dev/stdout
-      reopen: false
-    plugin: file-log
+  extraObjects: []
 
 # DSB defaults for statsd exporter
 # Contains the kong custom statsd image as
@@ -1546,6 +1500,10 @@ prometheus-statsd-exporter:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
+    # Ingress path.
+    path: /
+    # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
+    pathType: ImplementationSpecific
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
