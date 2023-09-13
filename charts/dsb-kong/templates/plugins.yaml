@@ -1,0 +1,67 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  namespace: {{ .Release.Namespace }}
+  labels:
+    global: "true"
+    {{- include "dsb-kong.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: kong
+    {{ include "dsb-kong.annotations" . | nindent 4 }}
+  name: prometheus
+config:
+  per_consumer: false
+  status_code_metrics: true
+  latency_metrics: true
+  bandwidth_metrics: true
+  upstream_health_metrics: true
+plugin: prometheus
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  namespace: {{ .Release.Namespace }}
+  labels:
+    global: "true"
+    {{- include "dsb-kong.labels" . | nindent 4 }}
+  name: correlation-id-global-plugin
+  annotations:
+    kubernetes.io/ingress.class: kong
+    {{ include "dsb-kong.annotations" . | nindent 4 }}
+config: 
+  echo_downstream: true
+  generator: uuid
+  header_name: X-DSB-Correlation-ID
+plugin: correlation-id
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  name: oidc-verify-signature
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "dsb-kong.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: kong
+    {{ include "dsb-kong.annotations" . | nindent 4 }}
+config: 
+  auth_methods: 
+  - bearer
+  issuer: https://login.microsoftonline.com/dsbintranet.onmicrosoft.com/.well-known/openid-configuration
+plugin: openid-connect
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  name: kong-requst-logging
+  annotations:
+    kubernetes.io/ingress.class: kong
+    {{ include "dsb-kong.annotations" . | nindent 4 }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    global: "true"
+    {{- include "dsb-kong.labels" . | nindent 4 }}
+config: 
+  path: /dev/stdout
+  reopen: false
+plugin: file-log
