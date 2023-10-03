@@ -15,6 +15,12 @@ license:
     tenantId: CHANGEME # The guid for the tenant
 
 # -----------------------------------------------------------------------------
+# Allows the chart to automatically create the cluster level plugins
+# -----------------------------------------------------------------------------
+plugins: 
+  enabled: true
+
+# -----------------------------------------------------------------------------
 # Kong parameters
 # Default values for DSB Kong based on Kong's helm chart 2.65.5
 # -----------------------------------------------------------------------------
@@ -30,6 +36,7 @@ kong:
   # - Postgres sub-chart parameters
   # - Miscellaneous parameters
   # - Kong Enterprise parameters
+  enabled: true
 
   # -----------------------------------------------------------------------------
   # Deployment parameters
@@ -185,7 +192,6 @@ kong:
     # To specify annotations or labels for the admin service, add them to the respective
     # "annotations" or "labels" dictionaries below.
     annotations:
-      konghq.com/protocol: "https"
       prometheus.io/path: "/metrics"
       prometheus.io/port: "8001"
       prometheus.io/scrape: "true"
@@ -205,7 +211,7 @@ kong:
 
     tls:
       # Enable HTTPS listen for the admin API
-      enabled: false
+      enabled: true
       servicePort: 8444
       containerPort: 8444
       # Set a target port for the TLS port in the admin API service, useful when using TLS
@@ -314,16 +320,16 @@ kong:
   proxy:
     # Enable creating a Kubernetes service for the proxy
     enabled: true
-    type: LoadBalancer
+    type: ClusterIP
     loadBalancerClass:
     # Override proxy Service name
     nameOverride: ""
     # To specify annotations or labels for the proxy service, add them to the respective
     # "annotations" or "labels" dictionaries below.
     annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
-      service.beta.kubernetes.io/port_443_health-probe_protocol: "tcp"
+    # service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    # service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
+    # service.beta.kubernetes.io/port_443_health-probe_protocol: "tcp"
     # If terminating TLS at the ELB, the following annotations can be used
     # "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "*",
     # "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true",
@@ -1276,6 +1282,7 @@ kong:
 # Contains the kong custom statsd image as
 # well as the config map for kong metrics
 prometheus-statsd-exporter:
+  enabled: true
   replicaCount: 1
   # deploymentRevisionHistoryLimit: 10
 

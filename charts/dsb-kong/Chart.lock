@@ -1,9 +1,9 @@
 dependencies:
 - name: kong
   repository: https://charts.konghq.com
-  version: 2.26.5
+  version: 2.27.0
 - name: prometheus-statsd-exporter
   repository: https://prometheus-community.github.io/helm-charts
   version: 0.10.0
-digest: sha256:afc8459ac29e744ebabfaca851e1e44329f72a897ac13854870e67445f279c89
-generated: "2023-09-11T09:11:29.6700832+02:00"
+digest: sha256:c625d4a9e6b49591d20ea5f26afff331d566312fc204ea56ad4ebdd34fbba80d
+generated: "2023-10-03T12:14:16.8771973+02:00"
