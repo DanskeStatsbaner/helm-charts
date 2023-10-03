@@ -15,6 +15,12 @@ license:
     tenantId: CHANGEME # The guid for the tenant
 
 # -----------------------------------------------------------------------------
+# Allows the chart to automatically create the cluster level plugins
+# -----------------------------------------------------------------------------
+plugins: 
+  enabled: true
+
+# -----------------------------------------------------------------------------
 # Kong parameters
 # Default values for DSB Kong based on Kong's helm chart 2.65.5
 # -----------------------------------------------------------------------------
@@ -30,11 +36,11 @@ kong:
   # - Postgres sub-chart parameters
   # - Miscellaneous parameters
   # - Kong Enterprise parameters
+  enabled: true
 
   # -----------------------------------------------------------------------------
   # Deployment parameters
   # -----------------------------------------------------------------------------
-
   deployment:
     kong:
       # Enable or disable Kong itself
@@ -1276,6 +1282,7 @@ kong:
 # Contains the kong custom statsd image as
 # well as the config map for kong metrics
 prometheus-statsd-exporter:
+  enabled: true
   replicaCount: 1
   # deploymentRevisionHistoryLimit: 10
 
