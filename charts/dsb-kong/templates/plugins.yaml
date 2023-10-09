@@ -1,3 +1,4 @@
+{{- if eq (toString .Values.plugins.enabled) "true" -}}
 apiVersion: configuration.konghq.com/v1
 kind: KongClusterPlugin
 metadata:
@@ -65,3 +66,4 @@ config:
   path: /dev/stdout
   reopen: false
 plugin: file-log
+{{- end -}}

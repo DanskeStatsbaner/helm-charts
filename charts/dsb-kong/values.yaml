@@ -15,6 +15,12 @@ license:
     tenantId: CHANGEME # The guid for the tenant
 
 # -----------------------------------------------------------------------------
+# Allows the chart to automatically create the cluster level plugins
+# -----------------------------------------------------------------------------
+plugins: 
+  enabled: true
+
+# -----------------------------------------------------------------------------
 # Kong parameters
 # Default values for DSB Kong based on Kong's helm chart 2.65.5
 # -----------------------------------------------------------------------------
@@ -30,6 +36,7 @@ kong:
   # - Postgres sub-chart parameters
   # - Miscellaneous parameters
   # - Kong Enterprise parameters
+  enabled: true
 
   # -----------------------------------------------------------------------------
   # Deployment parameters
@@ -166,6 +173,8 @@ kong:
     repository: kong/kong-gateway
     tag: "3.3"
 
+    # Specify a semver version if your image tag is not one (e.g. "nightly")
+    effectiveSemver:
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
@@ -185,7 +194,6 @@ kong:
     # To specify annotations or labels for the admin service, add them to the respective
     # "annotations" or "labels" dictionaries below.
     annotations:
-      konghq.com/protocol: "https"
       prometheus.io/path: "/metrics"
       prometheus.io/port: "8001"
       prometheus.io/scrape: "true"
@@ -205,7 +213,7 @@ kong:
 
     tls:
       # Enable HTTPS listen for the admin API
-      enabled: false
+      enabled: true
       servicePort: 8444
       containerPort: 8444
       # Set a target port for the TLS port in the admin API service, useful when using TLS
@@ -314,16 +322,16 @@ kong:
   proxy:
     # Enable creating a Kubernetes service for the proxy
     enabled: true
-    type: LoadBalancer
+    type: ClusterIP
     loadBalancerClass:
     # Override proxy Service name
     nameOverride: ""
     # To specify annotations or labels for the proxy service, add them to the respective
     # "annotations" or "labels" dictionaries below.
     annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
-      service.beta.kubernetes.io/port_443_health-probe_protocol: "tcp"
+    # service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    # service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
+    # service.beta.kubernetes.io/port_443_health-probe_protocol: "tcp"
     # If terminating TLS at the ELB, the following annotations can be used
     # "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "*",
     # "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": "true",
@@ -605,6 +613,11 @@ kong:
       #        name: CHANGEME-admin-token-secret
       #        key: CHANGEME-admin-token-key
 
+    # This section is any customer specific environments variables that doesn't require CONTROLLER_ prefix.
+    # Example as below, uncomment if required and add additional attributes as required.
+    # customEnv:
+    #   TZ: "Europe/Berlin"
+
     admissionWebhook:
       enabled: false
       failurePolicy: Ignore
@@ -621,6 +634,8 @@ kong:
       service:
         # Specify custom labels for the validation webhook service.
         labels: {}
+      # Tune the default Kubernetes timeoutSeconds of 10 seconds
+      # timeoutSeconds: 10
 
     ingressClass: kong
     # annotations for IngressClass resource (Kubernetes 1.18+)
@@ -1271,11 +1286,20 @@ kong:
   #   subPath: my-subpath # Optional, if you wish to mount a single key and not the entire ConfigMap
 
   extraObjects: []
+  # extraObjects:
+  # - apiVersion: configuration.konghq.com/v1
+  #   kind: KongClusterPlugin
+  #   metadata:
+  #     name: prometheus
+  #   config:
+  #     per_consumer: false
+  #   plugin: prometheus
 
 # DSB defaults for statsd exporter
 # Contains the kong custom statsd image as
 # well as the config map for kong metrics
 prometheus-statsd-exporter:
+  enabled: true
   replicaCount: 1
   # deploymentRevisionHistoryLimit: 10
 
