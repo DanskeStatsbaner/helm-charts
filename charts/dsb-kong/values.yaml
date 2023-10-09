@@ -21,7 +21,6 @@ plugins:
   enabled: true
 
   prometheus:
-    enabled: true
     name: prometheus
     per_consumer: false
     status_code_metrics: true
@@ -30,18 +29,16 @@ plugins:
     upstream_health_metrics: true
 
   correlationId:
-    enabled: true
+    name: correlation-id
     echo_downstream: true
     generator: uuid
     header_name: X-DSB-Correlation-ID
   
   oidc:
-    enabled: true
     name: oidc-verify-signature
     issuer: CHANGEME # The oidc issuer url ending in .well-known/openid-configuration
 
   requestLogging:
-    enabled: true
     name: kong-requst-logging
 
 
@@ -78,12 +75,15 @@ kong:
     # minReadySeconds: 60
     ## Specify the service account to create and to be assigned to the deployment / daemonset and for the migrations
     serviceAccount:
+      # If using workload identity, then this should be false
       create: true
       # Automount the service account token. By default, this is disabled, and the token is only mounted on the controller
       # container. Some sidecars require enabling this. Note that enabling this exposes Kubernetes credentials to Kong
       # Lua code, increasing potential attack surface.
       automountServiceAccountToken: false
     ## Optionally specify the name of the service account to create and the annotations to add.
+    # If using workload identity you should add the specific name
+    # of the workload identity
     #  name:
     #  annotations: {}
 
@@ -197,7 +197,7 @@ kong:
     # Kong Enterprise
     repository: kong/kong-gateway
     tag: "3.3"
-
+    sha: ""
     # Specify a semver version if your image tag is not one (e.g. "nightly")
     effectiveSemver:
     pullPolicy: IfNotPresent
@@ -598,7 +598,9 @@ kong:
     installCRDs: false
     image:
       repository: kong/kubernetes-ingress-controller
-      tag: "2.11"
+      tag: "2.10"
+      sha: ""
+      pullPolicy: IfNotPresent
       # Optionally set a semantic version for version-gated features. This can normally
       # be left unset. You only need to set this if your tag is not a semver string,
       # such as when you are using a "next" tag. Set this to the effective semantic
@@ -694,7 +696,7 @@ kong:
         path: "/readyz"
         port: 10254
         scheme: HTTP
-      initialDelaySeconds: 5
+      initialDelaySeconds: 15
       timeoutSeconds: 5
       periodSeconds: 10
       successThreshold: 1
@@ -892,7 +894,7 @@ kong:
       path: "/status/ready"
       port: status
       scheme: HTTP
-    initialDelaySeconds: 5
+    initialDelaySeconds: 10
     timeoutSeconds: 5
     periodSeconds: 10
     successThreshold: 1
@@ -943,6 +945,17 @@ kong:
   # Affinity for pod assignment
   # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   # affinity: {}
+  # If you want to prevent Kong from running on the same node
+  # affinity: 
+  #   podAntiAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #     - labelSelector:
+  #         matchExpressions:
+  #         - key: app
+  #           operator: In
+  #           values:
+  #           - kong-kong
+  #       topologyKey: "kubernetes.io/hostname"
 
   # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
   # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
@@ -1000,9 +1013,9 @@ kong:
 
   # Kong Pod Disruption Budget
   podDisruptionBudget:
-    enabled: false
+    enabled: true
     # Uncomment only one of the following when enabled is set to true
-    # maxUnavailable: "50%"
+    maxUnavailable: "1"
     # minAvailable: "50%"
 
   podSecurityPolicy:
@@ -1335,6 +1348,7 @@ prometheus-statsd-exporter:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: 0.3.1
+    sha: ""
 
   imagePullSecrets: []
   nameOverride: ""
