@@ -1,4 +1,5 @@
 {{- if eq (toString .Values.plugins.enabled) "true" -}}
+{{- if eq (toString .Values.plugins.prometheus.enabled) "true" -}}
 apiVersion: configuration.konghq.com/v1
 kind: KongClusterPlugin
 metadata:
@@ -9,15 +10,17 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: kong
     {{ include "dsb-kong.annotations" . | nindent 4 }}
-  name: prometheus
+  name: {{ .Values.plugins.prometheus.name | quote }}
 config:
-  per_consumer: false
-  status_code_metrics: true
-  latency_metrics: true
-  bandwidth_metrics: true
-  upstream_health_metrics: true
+  per_consumer: {{ .Values.plugins.prometheus.per_consumer }}
+  status_code_metrics: {{ .Values.plugins.prometheus.status_code_metrics }}
+  latency_metrics: {{ .Values.plugins.prometheus.latency_metrics }}
+  bandwidth_metrics: {{ .Values.plugins.prometheus.bandwidth_metrics }}
+  upstream_health_metrics: {{ .Values.plugins.prometheus.upstream_health_metrics }}
 plugin: prometheus
+{{- end -}}
 ---
+{{- if eq (toString .Values.plugins.correlationId.enabled) "true" -}}
 apiVersion: configuration.konghq.com/v1
 kind: KongClusterPlugin
 metadata:
@@ -25,20 +28,22 @@ metadata:
   labels:
     global: "true"
     {{- include "dsb-kong.labels" . | nindent 4 }}
-  name: correlation-id-global-plugin
+  name: {{ .Values.plugins.correlationId.name | quote }}
   annotations:
     kubernetes.io/ingress.class: kong
     {{ include "dsb-kong.annotations" . | nindent 4 }}
 config: 
-  echo_downstream: true
-  generator: uuid
-  header_name: X-DSB-Correlation-ID
+  echo_downstream: {{ .Values.plugins.correlationId.echo_downstream }}
+  generator: {{ .Values.plugins.correlationId.generator | quote }}
+  header_name: {{ .Values.plugins.correlationId.header_name | quote }}
 plugin: correlation-id
+{{- end -}}
 ---
+{{- if eq (toString .Values.plugins.oidc.enabled) "true" -}}
 apiVersion: configuration.konghq.com/v1
 kind: KongClusterPlugin
 metadata:
-  name: oidc-verify-signature
+  name: {{ .Values.plugins.oidc.name | quote }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "dsb-kong.labels" . | nindent 4 }}
@@ -48,13 +53,15 @@ metadata:
 config: 
   auth_methods: 
   - bearer
-  issuer: https://login.microsoftonline.com/dsbintranet.onmicrosoft.com/.well-known/openid-configuration
+  issuer: {{ .Values.plugins.oidc.issuer | quote }}
 plugin: openid-connect
+{{- end -}}
 ---
+{{- if eq (toString .Values.plugins.requestLogging.enabled) "true" -}}
 apiVersion: configuration.konghq.com/v1
 kind: KongClusterPlugin
 metadata:
-  name: kong-requst-logging
+  name: {{ .Values.plugins.requestLogging.name | quote }}
   annotations:
     kubernetes.io/ingress.class: kong
     {{ include "dsb-kong.annotations" . | nindent 4 }}
@@ -66,4 +73,5 @@ config:
   path: /dev/stdout
   reopen: false
 plugin: file-log
+{{- end -}}
 {{- end -}}
