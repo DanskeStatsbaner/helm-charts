@@ -1,7 +1,5 @@
 # -----------------------------------------------------------------------------
 # DSB Kong Ingress. Installs Kong as well as global cluster plugins and adds support for secret management.
-#
-# See example-values for example values given specific scenarios (ingress, gateway-control-plane, gateway-data-plane)
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
