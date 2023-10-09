@@ -2,17 +2,22 @@
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
-  name: azure-kvname-kong-license
+  name: kong-license
   namespace: {{ .Release.Namespace }}
   labels:
     {{ include "dsb-kong.labels" . | nindent 4 }}
   annotations:
     {{ include "dsb-kong.annotations" . | nindent 4 }}
 spec:
-  provider: azure
+  provider: {{ .Values.license.secretProvider.provider | quote }}
   parameters: 
+    {{- if eq (toString .Values.license.enabled) "true" -}}
+    usePodIdentity: "false"
+    clientID: {{ .Values.license.secretProvider.clientId | quote }}
+    {{- else -}}
     usePodIdentity: "true"
-    keyvaultName: {{ .Values.license.keyvault.name | quote }}
+    {{- end -}}
+    keyvaultName: {{ .Values.license.secretProvider.name | quote }}
     cloudName: ""                         
     objects:  |
       array:
@@ -20,7 +25,7 @@ spec:
           objectName: kong-license
           objectType: secret              # object types: secret, key, or cert
           objectVersion: ""               # [OPTIONAL] object versions, default to latest if empty
-    tenantId: {{ .Values.license.keyvault.tenantId | quote }}
+    tenantId: {{ .Values.license.secretProvider.tenantId | quote }}
   secretObjects:
   - data:
     - key: license
