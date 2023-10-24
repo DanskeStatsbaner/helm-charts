@@ -193,10 +193,10 @@ kong:
   # Specify Kong's Docker image and repository details here
   image:
     # repository: kong
-    # tag: "3.3"
+    # tag: "3.4"
     # Kong Enterprise
     repository: kong/kong-gateway
-    tag: "3.3"
+    tag: "3.4.1.1"
     sha: ""
     # Specify a semver version if your image tag is not one (e.g. "nightly")
     effectiveSemver:
@@ -598,7 +598,7 @@ kong:
     installCRDs: false
     image:
       repository: kong/kubernetes-ingress-controller
-      tag: "2.10"
+      tag: "2.12.0"
       sha: ""
       pullPolicy: IfNotPresent
       # Optionally set a semantic version for version-gated features. This can normally
