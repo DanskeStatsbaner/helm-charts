@@ -105,18 +105,18 @@ kong:
     # Uncomment this setion if not using the secret provider class
     # userDefinedVolumes: {}
     # userDefinedVolumeMounts: {}
-    # And comment this out
-    userDefinedVolumes:
-    - name: secrets-kong-license-inline
-      csi:
-        driver: secrets-store.csi.k8s.io
-        readOnly: true
-        volumeAttributes:
-          secretProviderClass: "kong-license"
-    userDefinedVolumeMounts:
-    - name: secrets-kong-license-inline
-      mountPath: "/mnt/secrets-store"
-      readOnly: true
+    # Uncomment this section if using the secret provider class
+    # userDefinedVolumes:
+    # - name: secrets-kong-license-inline
+    #   csi:
+    #     driver: secrets-store.csi.k8s.io
+    #     readOnly: true
+    #     volumeAttributes:
+    #       secretProviderClass: "kong-license"
+    # userDefinedVolumeMounts:
+    # - name: secrets-kong-license-inline
+    #   mountPath: "/mnt/secrets-store"
+    #   readOnly: true
     test:
       # Enable creation of test resources for use with "helm test"
       enabled: false
