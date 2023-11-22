@@ -1,12 +1,12 @@
 apiVersion: v2
 name: dsb-kong
-appVersion: "3.1.4"
-version: 3.1.4
+appVersion: "3.2.0"
+version: 3.2.0
 description: Install the Kong, statsd, DSB-specific cluster wide plugins and Kong specific gatekeeper policies
 type: application
 dependencies:
   - name: kong
-    version: 2.29.0
+    version: 2.32.0
     repository: https://charts.konghq.com
     condition: kong.enabled
   - name: prometheus-statsd-exporter
